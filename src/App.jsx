@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { RenderTexture, OrbitControls, PerspectiveCamera, Text, ContactShadows } from '@react-three/drei'
-import { suspend } from 'suspend-react'
+
 
 //const inter = import('@pmndrs/assets/fonts/inter_regular.woff')
 
@@ -24,17 +24,17 @@ function Cube() {
   useFrame((state) => (textRef.current.position.x = Math.sin(state.clock.elapsedTime) * 2))
   return (
     <mesh>
-      <boxGeometry />
+      <boxGeometry args={[2, 1, 1]} />
       <meshStandardMaterial>
         <RenderTexture attach="map" anisotropy={16}>
           <PerspectiveCamera makeDefault manual aspect={1 / 1} position={[0, 0, 5]} />
           <color attach="background" args={['orange']} />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} />
-          <Text  ref={textRef} fontSize={4} color="#555">
-            hello
+          <Text  ref={textRef} fontSize={2} color="#555">
+            marcin
           </Text>
-          <Dodecahedron />
+          <Dodecahedron scale={0.3} />
         </RenderTexture>
       </meshStandardMaterial>
     </mesh>
@@ -54,7 +54,7 @@ function Dodecahedron(props) {
         onClick={() => click(!clicked)}
         onPointerOver={() => hover(true)}
         onPointerOut={() => hover(false)}>
-        <dodecahedronGeometry args={[0.75]} />
+        <dodecahedronGeometry args={[2]} />
         <meshStandardMaterial color={hovered ? 'hotpink' : '#5de4c7'} />
       </mesh>
     </group>
